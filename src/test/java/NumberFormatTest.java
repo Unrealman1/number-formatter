@@ -6,7 +6,6 @@ import ru.formatter.stack.NumberToWords;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -160,6 +159,15 @@ public class NumberFormatTest {
         String expected = "один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто целых";
         String actual = numberFormatter.format("1234567890.12340000000000000000");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPluralization() {
+        assertEquals("один миллион одна тысяча один", numberFormatter.format("1001001"));
+        assertEquals("один миллион одна тысяча один целых один миллион одна тысяча одна десятимиллионная",
+                numberFormatter.format("1001001.1001001"));
+        assertEquals("два миллиона две тысячи двe", numberFormatter.format("2002002"));
+        assertEquals("три миллиона три тысячи три", numberFormatter.format("3003003"));
     }
 
     @Test
