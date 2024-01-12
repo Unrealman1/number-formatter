@@ -1,5 +1,7 @@
 package ru.formatter.stack;
 
+import static ru.formatter.stack.RuLocale.SCALE;
+
 public class DefaultProcessor extends AbstractProcessor {
 
     static private String MINUS = "минус";
@@ -35,7 +37,7 @@ public class DefaultProcessor extends AbstractProcessor {
         if (!(null == decimalValue || decimalValue.isEmpty())) {
             name = name.concat(SEPARATOR).concat(UNION_AND).concat(SEPARATOR)
                     .concat(processor.getName(decimalValue))
-                    .concat(SEPARATOR).concat(NumberToWords.SCALE.getName(-decimalValue.length()));
+                    .concat(SEPARATOR).concat(SCALE.getName(-decimalValue.length()));
         }
 
         return name;

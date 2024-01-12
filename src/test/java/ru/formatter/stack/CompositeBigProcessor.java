@@ -1,5 +1,7 @@
 package ru.formatter.stack;
 
+import static ru.formatter.stack.RuLocale.SCALE;
+
 public class CompositeBigProcessor extends AbstractProcessor {
 
     private HundredProcessor hundredProcessor = new HundredProcessor();
@@ -16,7 +18,7 @@ public class CompositeBigProcessor extends AbstractProcessor {
     }
 
     public String getToken() {
-        return NumberToWords.SCALE.getName(getPartDivider());
+        return SCALE.getName(getPartDivider());
     }
 
     protected AbstractProcessor getHighProcessor() {
