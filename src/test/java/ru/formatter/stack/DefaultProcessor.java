@@ -35,9 +35,14 @@ public class DefaultProcessor extends AbstractProcessor {
         }
 
         if (!(null == decimalValue || decimalValue.isEmpty())) {
+            int lastDigit = Integer.parseInt(decimalValue.substring(decimalValue.length() - 1));
+            int tokenI = 0;
+            if (lastDigit == 1) {
+                tokenI = 1;
+            }
             name = name.concat(SEPARATOR).concat(UNION_AND).concat(SEPARATOR)
                     .concat(processor.getName(decimalValue))
-                    .concat(SEPARATOR).concat(SCALE.getName(-decimalValue.length()));
+                    .concat(SEPARATOR).concat(RuLocale.Scale.values()[tokenI].getName(-decimalValue.length()));
         }
 
         return name;

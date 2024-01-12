@@ -14,13 +14,13 @@ public class NumberToWords implements NumberFormatter {
         if (number.contains(".")) {
             number = number.replaceFirst("0+$", "");
             if (number.endsWith(".")) {
-                return processor.getName(number.substring(0, number.length() - 1));
+                number = number.substring(0, number.length() - 1);
             }
-            return processor.getName(number);//.replaceFirst("один целых", "одна целая");
         }
-        return processor.getName(number);
+        return processor.getName(number)
+                .replace("один тысяча", "одна тысяча");
+//                .replaceFirst("одна ?(миллион|миллард)", "один");
     }
-
 
 
     public static void main(String... args) {

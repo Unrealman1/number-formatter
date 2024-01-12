@@ -1,7 +1,5 @@
 package ru.formatter.stack;
 
-import static ru.formatter.stack.RuLocale.SCALE;
-
 public class CompositeBigProcessor extends AbstractProcessor {
 
     private HundredProcessor hundredProcessor = new HundredProcessor();
@@ -17,8 +15,8 @@ public class CompositeBigProcessor extends AbstractProcessor {
         this.exponent = exponent;
     }
 
-    public String getToken() {
-        return SCALE.getName(getPartDivider());
+    public String getToken(int i) {
+        return RuLocale.Scale.values()[i].getName(getPartDivider());
     }
 
     protected AbstractProcessor getHighProcessor() {
@@ -53,7 +51,22 @@ public class CompositeBigProcessor extends AbstractProcessor {
         if (!highName.isEmpty()) {
             buffer.append(highName);
             buffer.append(SEPARATOR);
-            buffer.append(getToken());
+            // Определить ПАДЕЖ названия единиц измерения (рубль/рубля/рублей)
+            // Если цифра в разряде единиц от 1 до 4
+            int lastHighDigit = Integer.parseInt(high);
+            if (lastHighDigit >= 1 && lastHighDigit <= 4) {
+                // Если цифра в разряде единиц "1"
+                if (lastHighDigit == 1) {
+                    // Получиться "рубль"
+                    buffer.append(getToken(0));
+                }
+                if (lastHighDigit >= 2) {
+                    // Получиться "рубля"
+                    buffer.append(getToken(1));
+                }
+            } else {
+                buffer.append(getToken(2));
+            }
 
             if (!lowName.isEmpty()) {
                 buffer.append(SEPARATOR);
